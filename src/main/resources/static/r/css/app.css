@@ -1,0 +1,51 @@
+.card-image .card-title {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 0 20px 20px 0;
+}
+
+polygon { fill: #306874; transition: all 0.8s; }
+polygon:hover { 
+    transition: all 0.1s; 
+    fill: rgb(230, 235, 240) !important; 
+}
+
+.link {
+    cursor: pointer;
+}
+
+td, p {
+	word-wrap: break-word;
+}
+
+.header {
+	text-transform: capitalize;
+}
+
+.progress {
+	margin: 0;
+	position: fixed;
+	z-index: 99;
+}
+
+.signal {
+	background-repeat: no-repeat;
+	background-position: .2em;
+	padding-left: 2em;
+}
+
+.signal.n0 {background-image: url(../img/signal_0.svg);}
+.signal.n1 {background-image: url(../img/signal_1.svg);}
+.signal.n2 {background-image: url(../img/signal_2.svg);}
+.signal.n3 {background-image: url(../img/signal_3.svg);}
+.signal.n4 {background-image: url(../img/signal_4.svg);}
+
+.primary {background-color: #306874 !important;}
+.primary-text {color: #306874 !important;}
+.secondary {background-color: #ffb400 !important;}
+.secondary-text {color: #ffb400 !important;}
+
+.gb-bump-down {margin-top: .2em}
+
+#filter-box {
+	text-align: center;
+}

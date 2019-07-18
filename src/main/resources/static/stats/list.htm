@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head title="stats">
+    	<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
+    	<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
+    	<script type="text/javascript" src="/r/js/vue.js"></script>
+    	<script type="text/javascript" src="/r/js/vue-components.js"></script>
+    	<script type="text/javascript" src="/r/js/app.js"></script>
+    	<script type="text/javascript" src="/r/js/tags.js"></script>
+    	<script type="text/javascript" src="/r/js/form.js"></script>
+    	<script type="text/javascript" src="/r/js/riot.js"></script>
+    </head>
+    <body>
+        <ls-header-list all="stats">
+        	Times are in milliseconds.
+        </ls-header-list>
+
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 l9">
+                    <table id="vue-list" class="responsive-table highlight">
+                        <thead>
+                            <tr>
+                                <th>action</th>
+                                <th>min</th>
+                                <th>avg</th>
+                                <th>max</th>
+                                <th>total</th>
+                                <th>count</th>
+                                <th>errors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in list">
+                                <td>{{ item.action }}</td>
+                                <td>{{ item.min }}</td>
+								<td>????</td>
+                                <td>{{ item.max }}</td>
+                                <td>{{ item.total }}</td>
+                                <td>{{ item.count }}</td>
+                                <td>{{ item.errors }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <ls-footer>
+	        <script type="text/javascript">
+	        	riot.mount('*');
+	        	App.getList("stats");
+	        </script>
+        </ls-footer>
+    </body>
+</html>

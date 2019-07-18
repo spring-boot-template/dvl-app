@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head title="Skills">
+    	<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
+    	<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
+    	<script type="text/javascript" src="/r/js/vue.js"></script>
+    	<script type="text/javascript" src="/r/js/vue-components.js"></script>
+    	<script type="text/javascript" src="/r/js/app.js"></script>
+    	<script type="text/javascript" src="/r/js/tags.js"></script>
+    	<script type="text/javascript" src="/r/js/form.js"></script>
+    	<script type="text/javascript" src="/r/js/riot.js"></script>
+    </head>
+    <body>
+        <ls-header-list all="Skills"></ls-header-list>
+
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 l9">
+                    <table id="vue-list" class="responsive-table highlight">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="link"
+                                v-bind:title="'details for skill '+item.id"
+                                :data-href="'./edit.htm#'+item.id"
+                                v-for="item in list">
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.description }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a id="new" href="./edit.htm" class="btn waves-effect waves-light">
+                    <i class="material-icons">add</i>
+                </a>
+            </div>
+        </div>
+
+        <ls-footer>
+	        <script type="text/javascript">
+	        	riot.mount('*');
+	        	App.getList("skills");
+	        </script>
+        </ls-footer>
+    </body>
+</html>

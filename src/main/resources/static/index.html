@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head title="Home">
+    	<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
+    	<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
+    	<script type="text/javascript" src="/r/js/vue.js"></script>
+    	<script type="text/javascript" src="/r/js/vue-components.js"></script>
+    	<script type="text/javascript" src="/r/js/app.js"></script>
+    	<script type="text/javascript" src="/r/js/tags.js"></script>
+    	<script type="text/javascript" src="/r/js/form.js"></script>
+    	<script type="text/javascript" src="/r/js/riot.js"></script>
+    </head>
+    <body>
+        <ls-header></ls-header>
+        
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <h1 class="header center secondary-text">DVL Manager</h1>
+                
+                <div class="row center">
+                    <h5 class="header col s12 light">
+                    	Idle Heroes fusion manager.
+                    </h5>
+                </div>
+                
+                <div class="row center">
+                    <a target="_blank" class="btn-large waves-effect waves-light secondary tooltipped" data-tooltip="#forkme"
+                    	href="https://github.com/spring-boot-template">
+                        Git
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <div id="vue-list" class="row">
+                	<div class="row" v-for="group in list">
+                		<h5 class="secondary-text">{{ group.category }}</h5>
+                		<div class="divider"></div>
+	                    
+	                    <div class="col m4" v-for="menu in group.menus">
+	                        <div class="card">
+	                        	<a v-if="menu.insertable" 
+	                        		class="btn-floating halfway-fab waves-effect waves-light red" 
+	                        		:href="menu.path+'/edit.htm'">
+	                        		<i class="material-icons">add</i>
+	                        	</a>
+	                        	<div class="card-content">
+		                            <a class="card-title" :href="menu.path+'/list.htm'">
+		                            	{{ menu.title }}
+		                            </a>
+						        </div>
+						        <div class="card-action">
+							        <p>{{ menu.description }}</p>
+						        </div>
+	                        </div>
+	                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <ls-footer>
+        	<script type="text/javascript">
+        		riot.mount('*');
+        		App.getList("menus");
+			</script>
+        </ls-footer>
+    </body>
+</html>

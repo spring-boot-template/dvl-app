@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head title="Skill">
+    	<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
+    	<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
+    	<script type="text/javascript" src="/r/js/vue.js"></script>
+    	<script type="text/javascript" src="/r/js/vue-components.js"></script>
+    	<script type="text/javascript" src="/r/js/app.js"></script>
+    	<script type="text/javascript" src="/r/js/tags.js"></script>
+    	<script type="text/javascript" src="/r/js/form.js"></script>
+    	<script type="text/javascript" src="/r/js/riot.js"></script>
+    </head>
+    <body>
+        <ls-header></ls-header>
+        
+        <div class="section no-pad-bot" id="vue-item">
+            <div class="container center">
+                <h1 class="header center secondary-text">{{ item.name }} skill</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">{{ item.description }}.</h5>
+                </div>
+                
+                <img v-if="item.pic" :src="item.pic">
+                
+                <div class="row center">
+                    <form id="form" name="skills" class="col s12">
+                    	<input type="hidden" id="id" name="id" :value="item.id">
+                    	
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input name="name" v-model="item.name" type="text" placeholder="skill name">
+                                <label>Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="pic" v-model="item.pic" type="text" placeholder="pic url">
+                                <label>pic</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="description" v-model="item.description" type="text" placeholder="skill description">
+                                <label>Description</label>
+                            </div>
+                        </div>
+
+                        <a id="return" href="./list.htm" class="btn waves-effect waves-light tooltipped" 
+                        	data-tooltip="Return to list">
+                            <i class="material-icons">keyboard_return</i>
+                        </a>
+                        
+                        <ls-delete from="skills" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+		<ls-footer>
+	        <script type="text/javascript">
+	        	riot.mount('*');
+	        	App.get("skills/"+App.hash());
+	        </script>
+        </ls-footer>
+    </body>
+</html>

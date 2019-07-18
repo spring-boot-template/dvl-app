@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "dvl.rest.prefix",
+    "type": "java.lang.String",
+    "description": "REST API URL prefix for DVL Services"
+  },
+  {
+    "name": "dvl.project.version",
+    "type": "java.lang.String",
+    "description": "Project version, according to maven pom.xml"
+  },
+  {
+    "name": "dvl.rest.debug.payLoad",
+    "type": "java.lang.Boolean",
+    "description": "Enable debugging of request payloads"
+  },
+  {
+    "name": "DVL_IH_LOG",
+    "type": "java.lang.String",
+    "description": "Log file location"
+  }
+]}
