@@ -1,5 +1,5 @@
 # Aplicação simples em Spring Boot para testes
-A aplicação utiliza Spring Boot, Java 8+ e Hibernate no backend, enquanto no frontend possui Vue.js, Riot.js e Materialize.
+A aplicação utiliza Spring Boot, Java 11 e Hibernate no backend, enquanto no frontend possui Vue.js, Riot.js e Materialize.
 
 A aplicação está configurada para criar as tabelas no banco automaticamente, mas é necessário criar uma base PostgreSQL com os dados de conexão presentes no application.properties.
 
