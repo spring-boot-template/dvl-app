@@ -22,15 +22,9 @@
 		<swagger.version>2.9.2</swagger.version>
 	</properties>
 
-	<distributionManagement>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</distributionManagement>
-
 	<dependencies>
-		<!-- internal -->
+		<!-- NOTA: este projeto deve estar no mesmo workspace para resolução local de dependências -->
+		<!-- link: https://github.com/spring-boot-template/dvl-core -->
 		<dependency>
 			<groupId>com.dvlcube.xpress</groupId>
 			<artifactId>dvl-core</artifactId>
