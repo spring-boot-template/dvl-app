@@ -1,5 +1,6 @@
 package com.dvlcube.utils.interfaces.rest;
 
+import com.dvlcube.app.jpa.DvlJpaRepository;
 import com.dvlcube.utils.interfaces.MxBean;
 
 /**
@@ -11,7 +12,7 @@ public interface FilterableService<B extends MxBean<?>> {
 	/**
 	 * Get all B's with id like id.
 	 * 
-	 * @see LicenseManagerJpaRepository
+	 * @see DvlJpaRepository
 	 * @param id
 	 * @return List<B>
 	 * @since 2 de mai de 2019
