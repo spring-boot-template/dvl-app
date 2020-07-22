@@ -46,18 +46,20 @@ echo "https://www.linkedin.com/in/${linkedin_name}/"
 api_base_url="http://localhost:${port}/${linkedin_name:0:3}"
 web_base_url="http://localhost:${port}"
 
-logs=/tmp/${app}-test.out
-cd $mydir
-nohup ./mvnw spring-boot:run &> $logs&
-pid=$!
-echo "starting server. pid: $pid, logs: $logs"
+if [[ -n "${port}" ]]; then
+	logs=/tmp/${app}-test.out
+	cd $mydir
+	nohup ./mvnw spring-boot:run &> $logs&
+	pid=$!
+	echo "starting server. pid: $pid, logs: $logs"
 
-while [[ -n "$(assert-up.sh $web_base_url 2>&1)" ]]
-do
-	echo "waiting for $web_base_url ... ctrl+c to skip"
-	tail $logs
-	sleep 5
-done
+	while [[ -n "$(assert-up.sh $web_base_url 2>&1)" ]]
+	do
+		echo "waiting for $web_base_url ... ctrl+c to skip"
+		tail $logs
+		sleep 5
+	done
+fi
 
 #echo && echo "local server:"
 #echo "$web_base_url"
@@ -130,9 +132,6 @@ test_0c_API_PREFIX() {
 # modificar GET /skills para retornar ordenado por nome
 test_1_SKILLS_BY_NAME() {
 	# >&2 echo "posting new objects ..."
-	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"zzz\"}" > /dev/null
-	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"yyy\"}" > /dev/null
-	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"aaa\"}" > /dev/null
 	POST /skills '{"name": "zzz"}'
 	POST /skills '{"name": "yyy"}'
 	POST /skills '{"name": "aaa"}'
@@ -146,15 +145,32 @@ test_1_SKILLS_BY_NAME() {
 test_2_STATS_ORDER() {
 	#echo "$web_base_url/stats/list.htm"
 	
-	first=$(curl -s "$api_base_url/stats" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['total']")
-	last=$(curl -s "$api_base_url/stats" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[-1]['total']")
+	# first=$(curl -s "$api_base_url/stats" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['total']")
+	# last=$(curl -s "$api_base_url/stats" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[-1]['total']")
+
+	response=$(GET '/stats')
+	echo "$response" > /tmp/stats
+	first=$(echo "$response" | jprop.sh "[0]['total']")
+	last=$(echo "$response" | jprop.sh "[-1]['total']")
 	
-	result "[[ \"$last\" -gt \"$first\" ]]"
+	result "[[ \"$last\" -lt \"$first\" ]]"
 }
 
 # corrigir GET /skills/like para filtrar por nome
 test_3_SKILLS_LIKE() {
-	like=$(curl -s "$api_base_url/skills/like?id=y" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['name']")
+	#like=$(curl -s "$api_base_url/skills/like?id=y" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['name']")
+	
+	like_search=y
+
+	response=$(GET "/skills/like?id=$like_search")
+	like=$(echo "$response" | jprop.sh "[0]['name']")
+
+	if [[ ! -n "$like" ]]; then
+		response=$(GET "/skills/like?name=$like_search")
+		like=$(echo "$response" | jprop.sh "[0]['name']")
+	fi
+
+	echo "$response" > /tmp/skills.like
 	result "[ \"$like\" == yyy ]"
 }
 
@@ -273,6 +289,8 @@ result=FAILED
 
 echo && echo "${result}: $ok_points/$total_points"
 
-echo "press any key to terminate $web_base_url"
-read anyKey
-kill $pid
+if [[ -n "$pid" ]]; then
+	echo "press any key to terminate $web_base_url"
+	read anyKey
+	kill $pid
+fi
