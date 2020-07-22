@@ -145,9 +145,6 @@ test_1_SKILLS_BY_NAME() {
 test_2_STATS_ORDER() {
 	#echo "$web_base_url/stats/list.htm"
 	
-	# first=$(curl -s "$api_base_url/stats" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['total']")
-	# last=$(curl -s "$api_base_url/stats" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[-1]['total']")
-
 	response=$(GET '/stats')
 	echo "$response" > /tmp/stats
 	first=$(echo "$response" | jprop.sh "[0]['total']")
@@ -158,8 +155,6 @@ test_2_STATS_ORDER() {
 
 # corrigir GET /skills/like para filtrar por nome
 test_3_SKILLS_LIKE() {
-	#like=$(curl -s "$api_base_url/skills/like?id=y" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['name']")
-	
 	like_search=y
 
 	response=$(GET "/skills/like?id=$like_search")
@@ -243,8 +238,8 @@ test_5_ASPECT() {
 # skill com o nome 
 test_6_SKILL_BY_NAME() {
 	name=aaa
-	exists_a=$(curl -s "$api_base_url/skills/name/$name" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)['name']")
-	exists_b=$(curl -s "$api_base_url/skills?name=$name" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)['name']")
+	exists_a=$(GET "/skills/name/$name" | jprop.sh "['name']")
+	exists_b=$(GET "/skills?name=$name" | jprop.sh "['name']")
 	
 	if [[ "$exists_a" != $name ]]; then
 		exists_a=false
@@ -260,8 +255,8 @@ test_6_SKILL_BY_NAME() {
 # boolean indicando se bean existe com o nome 
 test_6_1_SKILL_EXISTS() {
 	name=aaa
-	exists_a=$(curl -s "$api_base_url/skills/exists/name/$name")
-	exists_b=$(curl -s "$api_base_url/skills/exists?name=$name")
+	exists_a=$(GET "/skills/exists/name/$name")
+	exists_b=$(GET "/skills/exists?name=$name")
 	
 	if [[ "$exists_a" != true ]]; then
 		exists_a=false
