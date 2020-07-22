@@ -1,6 +1,20 @@
 #!/bin/bash
+# depends on https://github.com/ulisseslima/bash-utils.git
 mydir=$(dirname `readlink -f $0`)
 me=$(readlink -f $0)
+app=dvl-app
+
+if [[ -n "$1" ]]; then
+	altdir="$(readlink -f $1)"
+	if [[ ! -d "$altdir/$app" ]]; then
+		echo "invalid dir: $altdir"
+		exit 1
+	fi
+	mydir="$altdir/$app"
+fi
+
+echo && echo "################################"
+echo "dir: $mydir"
 
 total_points=0
 ok_points=0
@@ -10,7 +24,14 @@ ascii_code() {
 }
 
 gprop() {
-	grep "$1" $mydir/src/main/resources/application.properties | grep -v '#' | cut -d'=' -f2
+	f="$mydir/src/main/resources/application.properties"
+	if [[ -f "$f" ]]; then
+		>&2 echo "analyzing: $f"
+		grep "$1" $mydir/src/main/resources/application.properties | grep -v '#' | cut -d'=' -f2
+	else
+		>&2 echo "not a file: $f"
+		exit 1
+	fi
 }
 
 linkedin_name=$(gprop 'linkedin.name')
@@ -19,11 +40,53 @@ port=$(gprop 'server.port')
 name_1=$(ascii_code ${linkedin_name:0:1})
 name_port="${name_1}80"
 
+echo && echo "linkedin:"
+echo "https://www.linkedin.com/in/${linkedin_name}/"
+
 api_base_url="http://localhost:${port}/${linkedin_name:0:3}"
 web_base_url="http://localhost:${port}"
 
-echo "https://www.linkedin.com/in/${linkedin_name}/"
-echo "$web_base_url"
+logs=/tmp/${app}-test.out
+cd $mydir
+nohup ./mvnw spring-boot:run &> $logs&
+pid=$!
+echo "starting server. pid: $pid, logs: $logs"
+
+while [[ -n "$(assert-up.sh $web_base_url 2>&1)" ]]
+do
+	echo "waiting for $web_base_url ... ctrl+c to skip"
+	tail $logs
+	sleep 5
+done
+
+#echo && echo "local server:"
+#echo "$web_base_url"
+#if [[ -n "$(assert-up.sh $web_base_url 2>&1)" ]]; then
+#	echo "local server is not running, press any key to ignore, ctrl+c to stop"
+#	read any
+#fi
+
+POST() {
+	if [[ ! -n "$api_base_url" ]]; then
+		echo "api_base_url is undefined"
+		exit 1
+	fi
+
+	endpoint="${1/\//}"
+	json="$2"
+	curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/$endpoint" -d "$json" > /dev/null
+}
+
+GET() {
+	if [[ ! -n "$api_base_url" ]]; then
+		echo "api_base_url is undefined"
+		exit 1
+	fi
+
+	endpoint="${1/\//}"
+	json="$2"
+	curl -s "$api_base_url/$endpoint"
+}
 
 result() {
 	test="$1"
@@ -33,10 +96,6 @@ result() {
 	echo "##############"
 	echo "-- ${FUNCNAME[1]}: $msg $extra"
 	echo "${test}?"
-	
-	#if [[ "$msg" == "OK" ]]; then
-	#	ok_points=$((ok_points+1))		
-	#fi
 	
 	if eval $test; then
 		echo OK
@@ -70,19 +129,16 @@ test_0c_API_PREFIX() {
 
 # modificar GET /skills para retornar ordenado por nome
 test_1_SKILLS_BY_NAME() {
-	#echo "$api_base_url/skills -d {\"name\": \"zzz\"}"
-	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"zzz\"}" && echo
-	curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"zzz\"}" > /dev/null
+	# >&2 echo "posting new objects ..."
+	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"zzz\"}" > /dev/null
+	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"yyy\"}" > /dev/null
+	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"aaa\"}" > /dev/null
+	POST /skills '{"name": "zzz"}'
+	POST /skills '{"name": "yyy"}'
+	POST /skills '{"name": "aaa"}'
 	
-	#echo "$api_base_url/skills -d {\"name\": \"yyy\"}"
-	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"yyy\"}" && echo
-	curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"yyy\"}" > /dev/null
-	
-	#echo "$api_base_url/skills -d {\"name\": \"aaa\"}"
-	#curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"aaa\"}" && echo
-	curl -s -X POST -H 'Content-Type: application/json' "$api_base_url/skills" -d "{\"name\": \"aaa\"}" > /dev/null
-	
-	first=$(curl -s "$api_base_url/skills" | python -m json.tool | python -c "import sys, json; print json.load(sys.stdin)[0]['name']")
+	response=$(GET '/skills')
+	first=$(echo "$response" | jprop.sh "[0]['name']")
 	result "[[ \"$first\" == \"aaa\" ]]"
 }
 
@@ -208,4 +264,15 @@ do
 	$func
 done < <(grep test_ "$me" | grep -v 'done' | cut -d'(' -f1)
 
-echo && echo "$ok_points/$total_points"
+min=$((total_points/2+1))
+
+result=FAILED
+[[ $ok_points -eq $min ]] && result=LOW
+[[ $ok_points -gt $min ]] && result=PASSED
+[[ $ok_points -eq $total_points ]] && result=PERFECT
+
+echo && echo "${result}: $ok_points/$total_points"
+
+echo "press any key to terminate $web_base_url"
+read anyKey
+kill $pid
