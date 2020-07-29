@@ -1,0 +1,51 @@
+## YAML Template.
+---
+
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+
+dvl:
+    rest:
+        debug:
+            payLoad: false
+        prefix: /gui
+    project:
+        version: @project.version@
+
+linkedin:
+    name: guilherme-scosta
+
+logging:
+    level:
+        org:
+            springframework:
+                web:
+                    filter:
+                        CommonsRequestLoggingFilter: DEBUG
+
+sever:
+    port: 10380
+
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/teste?useTimezone=true&serverTimezone=UTC
+        username: root
+        password: root
+        driverClassName: com.mysql.cj.jdbc.Driver
+        
+    jpa:
+        show-sql: true
+        hibernate:
+            ddl-auto: update
+            format_sql: true
+            jdbc:
+                lob:
+                    non_contextual_creation: true
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate:
+                format_sql: true
+                dialect: org.hibernate.dialect.MySQL5Dialect  
+            
+    quartz:
+        job-store-type: jdbc
