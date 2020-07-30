@@ -22,7 +22,7 @@ public class SwagggerConfig {
     public Docket api(BuildProperties buildProperties){
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.dvlcube.app.rest"))
+                .apis(RequestHandlerSelectors.basePackage("com.dvlcube.app.controller"))
                 .paths(PathSelectors.ant("/**"))
                 .build();
 

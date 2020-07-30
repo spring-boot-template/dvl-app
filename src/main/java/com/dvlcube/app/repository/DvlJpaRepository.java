@@ -1,4 +1,4 @@
-package com.dvlcube.app.jpa;
+package com.dvlcube.app.repository;
 
 import static com.dvlcube.utils.query.MxQuery.$;
 

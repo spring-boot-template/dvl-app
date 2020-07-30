@@ -1,6 +1,6 @@
 package com.dvlcube.utils.interfaces.rest;
 
-import com.dvlcube.app.jpa.DvlJpaRepository;
+import com.dvlcube.app.repository.DvlJpaRepository;
 import com.dvlcube.utils.interfaces.MxBean;
 
 /**

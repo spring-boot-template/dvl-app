@@ -1,4 +1,4 @@
-package com.dvlcube.app.rest;
+package com.dvlcube.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ import com.dvlcube.utils.interfaces.MxService;
  */
 @RestController
 @RequestMapping("env")
-public class EnvService implements MxService {
+public class EnvController implements MxService {
 	@Value("${dvl.project.version}")
 	public String version;
 

@@ -1,4 +1,4 @@
-package com.dvlcube.app.rest;
+package com.dvlcube.app.controller;
 
 import static com.dvlcube.app.manager.data.e.Menu.CONFIGURATION;
 
@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.dvlcube.app.rest.GenericRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvlcube.app.interfaces.MenuItem;
-import com.dvlcube.app.jpa.repo.SkillRepository;
+import com.dvlcube.app.repository.SkillRepository;
 import com.dvlcube.app.manager.data.SkillBean;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
@@ -31,7 +32,7 @@ import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 @RestController
 @MenuItem(value = CONFIGURATION)
 @RequestMapping("${dvl.rest.prefix}/skills")
-public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
+public class SkillController implements MxFilterableBeanService<SkillBean, Long> {
 
 	@Autowired
 	private SkillRepository repo;

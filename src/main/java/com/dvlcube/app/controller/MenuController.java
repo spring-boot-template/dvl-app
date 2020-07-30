@@ -1,4 +1,4 @@
-package com.dvlcube.app.rest;
+package com.dvlcube.app.controller;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,7 +26,7 @@ import com.dvlcube.utils.interfaces.MxService;
  */
 @RestController
 @RequestMapping("${dvl.rest.prefix}/menus")
-public class MenuService implements MxService {
+public class MenuController implements MxService {
 	private Logger log = LogManager.getLogger(this.getClass());
 
 	public static final String REST_PREFIX_VAR = "${dvl.rest.prefix}/";

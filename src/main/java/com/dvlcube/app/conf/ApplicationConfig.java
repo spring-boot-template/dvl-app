@@ -3,8 +3,8 @@ package com.dvlcube.app.conf;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.dvlcube.app.jpa.DvlJpaRepository;
-import com.dvlcube.app.jpa.repo.UserRepository;
+import com.dvlcube.app.repository.DvlJpaRepository;
+import com.dvlcube.app.repository.UserRepository;
 
 /**
  * Simple general configs.

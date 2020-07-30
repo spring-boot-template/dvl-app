@@ -1,4 +1,4 @@
-package com.dvlcube.app.rest;
+package com.dvlcube.app.controller;
 
 import static com.dvlcube.app.manager.data.e.Menu.MONITORING;
 import static com.dvlcube.utils.query.MxQuery.$;
@@ -30,7 +30,7 @@ import com.dvlcube.utils.interfaces.MxService;
 @RestController
 @MenuItem(value = MONITORING, readOnly = true)
 @RequestMapping("${dvl.rest.prefix}/stats")
-public class StatService implements MxService {
+public class StatController implements MxService {
 	private Logger log = LogManager.getLogger(this.getClass());
 
 	/**

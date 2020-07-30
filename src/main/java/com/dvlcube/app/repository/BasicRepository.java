@@ -1,4 +1,4 @@
-package com.dvlcube.app.jpa;
+package com.dvlcube.app.repository;
 
 import java.util.Collection;
 

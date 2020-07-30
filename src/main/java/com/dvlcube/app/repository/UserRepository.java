@@ -1,10 +1,10 @@
-package com.dvlcube.app.jpa.repo;
+package com.dvlcube.app.repository;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.dvlcube.app.jpa.DvlRepository;
+import com.dvlcube.app.repository.DvlRepository;
 import com.dvlcube.app.manager.data.UserBean;
 
 /**

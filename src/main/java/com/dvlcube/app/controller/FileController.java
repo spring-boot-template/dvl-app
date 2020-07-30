@@ -1,4 +1,4 @@
-package com.dvlcube.app.rest;
+package com.dvlcube.app.controller;
 
 import static com.dvlcube.utils.query.MxQuery.$;
 
@@ -23,7 +23,7 @@ import com.dvlcube.utils.interfaces.MxService;
  */
 @RestController
 @RequestMapping("${dvl.rest.prefix}/files")
-public class FileService implements MxService {
+public class FileController implements MxService {
 	protected Logger log = LogManager.getLogger(this.getClass());
 
 	/**
