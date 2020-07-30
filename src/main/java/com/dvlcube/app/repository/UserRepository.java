@@ -4,20 +4,19 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.dvlcube.app.repository.DvlRepository;
-import com.dvlcube.app.manager.data.UserBean;
+import com.dvlcube.app.model.User;
 
 /**
  * @since 23 de mai de 2019
  * @author Ulisses Lima
  */
 @Repository
-public interface UserRepository extends DvlRepository<UserBean, Long> {
+public interface UserRepository extends DvlRepository<User, Long> {
 	/**
 	 * @param email
 	 * @return user
 	 * @since 23 de mai de 2019
 	 * @author Ulisses Lima
 	 */
-	Optional<UserBean> findByEmail(String email);
+	Optional<User> findByEmail(String email);
 }

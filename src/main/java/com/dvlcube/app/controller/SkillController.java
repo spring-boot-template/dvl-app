@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dvlcube.app.interfaces.MenuItem;
 import com.dvlcube.app.repository.SkillRepository;
-import com.dvlcube.app.manager.data.SkillBean;
+import com.dvlcube.app.model.Skill;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 
@@ -32,55 +32,55 @@ import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 @RestController
 @MenuItem(value = CONFIGURATION)
 @RequestMapping("${dvl.rest.prefix}/skills")
-public class SkillController implements MxFilterableBeanService<SkillBean, Long> {
+public class SkillController implements MxFilterableBeanService<Skill, Long> {
 
 	@Autowired
 	private SkillRepository repo;
 
 	@Override
 	@GetMapping
-	public Iterable<SkillBean> get(@RequestParam Map<String, String> params) {
+	public Iterable<Skill> get(@RequestParam Map<String, String> params) {
 		return repo.firstPage();
 	}
 
 	@Override
 	@GetMapping("/{id}")
-	public Optional<SkillBean> get(@PathVariable Long id) {
+	public Optional<Skill> get(@PathVariable Long id) {
 		return repo.findById(id);
 	}
 
 	@Override
 	@PostMapping
-	public MxRestResponse post(@Valid @RequestBody SkillBean body) {
-		SkillBean save = repo.save(body);
+	public MxRestResponse post(@Valid @RequestBody Skill body) {
+		Skill save = repo.save(body);
 		return GenericRestResponse.ok(save.getId());
 	}
 
 	/**
 	 * @param params
-	 * @return List<SkillBean>
+	 * @return List<Skill>
 	 * @since 18 de abr de 2019
 	 * @author Ulisses Lima
 	 */
 	@GetMapping("/filtered")
-	public List<SkillBean> getFiltered(@RequestParam Map<String, String> params) {
+	public List<Skill> getFiltered(@RequestParam Map<String, String> params) {
 		return repo.findAllBy(params);
 	}
 
 	/**
 	 * @param group
 	 * @param params
-	 * @return List<SkillBean>
+	 * @return List<Skill>
 	 * @since 18 de abr de 2019
 	 * @author Ulisses Lima
 	 */
 	@GetMapping("/group/{group}/filtered")
-	public List<SkillBean> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
+	public List<Skill> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
 		return repo.findAllBy(params, group);
 	}
 
 	@GetMapping("/like")
-	public Iterable<SkillBean> getLike(@RequestParam(required = true) String id) {
+	public Iterable<Skill> getLike(@RequestParam(required = true) String id) {
 		return repo.findAllLike(id);
 	}
 

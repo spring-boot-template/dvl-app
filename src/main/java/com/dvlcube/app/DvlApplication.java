@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.dvlcube.app.manager.data.UserBean;
+import com.dvlcube.app.model.User;
 import com.dvlcube.app.conf.ApplicationConfig;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @SpringBootApplication
 @ComponentScan(basePackages = "com.dvlcube")
-@EntityScan(basePackageClasses = UserBean.class)
+@EntityScan(basePackageClasses = User.class)
 @EnableSwagger2
 public class DvlApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
