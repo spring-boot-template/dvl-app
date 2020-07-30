@@ -1,14 +1,13 @@
 package com.dvlcube.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.dvlcube.utils.BaseEntity;
 import com.dvlcube.utils.interfaces.MxBean;
 import com.dvlcube.utils.interfaces.Nameable;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * @since 3 de jun de 2019
@@ -28,4 +27,6 @@ public class Job implements MxBean<Long>, Nameable, BaseEntity<Long> {
 	private String name;
 	private Integer max;
 
+	@OneToMany(mappedBy = "job")
+	private List<Hero> heroes;
 }

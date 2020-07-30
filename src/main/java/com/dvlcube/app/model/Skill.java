@@ -1,10 +1,6 @@
 package com.dvlcube.app.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 import com.dvlcube.utils.BaseEntity;
 import com.dvlcube.utils.interfaces.MxBean;
@@ -12,6 +8,8 @@ import com.dvlcube.utils.interfaces.Nameable;
 import com.dvlcube.utils.interfaces.Presentable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * @since 3 de jun de 2019
@@ -31,4 +29,7 @@ public class Skill implements Nameable, MxBean<Long>, Presentable, BaseEntity<Lo
 	private String name;
 	private String description;
 	private String pic;
+
+//	@ManyToMany
+//	private List<Hero> heroes;
 }

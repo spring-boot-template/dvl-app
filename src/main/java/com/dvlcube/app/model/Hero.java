@@ -2,13 +2,7 @@ package com.dvlcube.app.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 import com.dvlcube.utils.BaseEntity;
 import com.dvlcube.utils.interfaces.MxBean;
@@ -38,11 +32,16 @@ public class Hero implements MxBean<Long>, Nameable, Presentable, BaseEntity<Lon
 	private String url;
 
 	@ManyToOne
+	@JoinColumn(name = "factionbean", referencedColumnName = "id")
 	private Faction faction;
+
 	@ManyToOne
+	@JoinColumn(name = "jobbean", referencedColumnName = "id")
 	private Job job;
 
 	@ManyToMany
-	private List<Skill> skillList;
+	private List<Skill> skills;
 
+	@OneToMany(mappedBy = "hero")
+	private List<BagHero> bagHeroes;
 }

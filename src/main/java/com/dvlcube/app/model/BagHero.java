@@ -24,13 +24,24 @@ public class BagHero implements MxBean<Long>, Nameable, BaseEntity<Long> {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private int amount;
+
+	private Integer amount;
 
 	@ManyToOne
+	@JoinColumn(name = "owner_id", referencedColumnName = "id")
 	private User owner;
 
 	@ManyToOne
+	@JoinColumn(name = "herobean", referencedColumnName = "id")
 	private Hero hero;
+
+	@ManyToOne
+	@JoinColumn(name = "bagbean", referencedColumnName = "id")
+	private Bag bag;
+
+	@ManyToOne
+	@JoinColumn(name = "fusionbean", referencedColumnName = "id")
+	private Fusion fusion;
 
 	@Override
 	public String getName() {

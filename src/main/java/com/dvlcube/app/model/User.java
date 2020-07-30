@@ -1,13 +1,9 @@
 package com.dvlcube.app.model;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 import com.dvlcube.utils.BaseEntity;
@@ -16,6 +12,8 @@ import com.dvlcube.utils.interfaces.MxBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * @see AuthProvider
@@ -65,9 +63,20 @@ public class User implements MxBean<Long>, BaseEntity<Long> {
 	@JsonIgnore
 	private String password;
 
+	@UpdateTimestamp
+	@CreationTimestamp
 	private Date lastActivity;
 
 	private Integer requests;
+
+	@OneToMany(mappedBy = "owner")
+	private List<Bag> bags;
+
+	@OneToMany(mappedBy = "owner")
+	private List<BagHero> bagHeroes;
+
+	@OneToMany(mappedBy = "owner")
+	private List<Fusion> fusions;
 
 	/**
 	 * @since 5 de jun de 2019

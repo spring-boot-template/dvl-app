@@ -7,31 +7,31 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import java.util.Date;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
 @Builder
 public class UserDTO extends BaseDTO {
+    @Positive
     private Long id;
 
     @Email
-    @Column(nullable = false)
+    @NotBlank
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank
     private String name;
 
+    @NotEmpty
     private String pic;
 
-    @Column(nullable = false)
+    @NotNull
     private Boolean verified = false;
 
-    @JsonIgnore
+    @NotBlank
     private String password;
 
-    private Date lastActivity;
-
-    private int requests;
+    @Positive
+    private Integer requests;
 }
