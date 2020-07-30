@@ -16,7 +16,7 @@ public class HeroServiceImpl extends GenericServiceImpl<Hero, Long> implements H
 
     private HeroMapper mapper;
 
-    public HeroServiceImpl(HeroMapper mapper) {
-        this.mapper = mapper;
+    public HeroServiceImpl() {
+        this.mapper = new HeroMapper();
     }
 }

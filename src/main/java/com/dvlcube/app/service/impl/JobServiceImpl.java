@@ -16,7 +16,7 @@ public class JobServiceImpl extends GenericServiceImpl<Job, Long> implements Job
 
     private JobMapper mapper;
 
-    public JobServiceImpl(JobMapper mapper) {
-        this.mapper = mapper;
+    public JobServiceImpl() {
+        this.mapper = new JobMapper();
     }
 }

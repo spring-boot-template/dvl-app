@@ -1,13 +1,14 @@
 package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.UserDTO;
+import com.dvlcube.app.dto.filter.UserFilterDTO;
 import com.dvlcube.app.model.User;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class UserMapper implements GenericMapper<User, UserDTO>, FilterMapper<User, UserDTO> {
+public class UserMapper implements GenericMapper<User, UserDTO>, FilterMapper<User, UserFilterDTO> {
     @Override
-    public User convertFilterToEntity(UserDTO filterDTO) {
+    public User convertFilterToEntity(UserFilterDTO filterDTO) {
         return User.builder().build();
     }
 

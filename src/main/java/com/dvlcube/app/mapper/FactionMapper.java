@@ -1,13 +1,14 @@
 package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.FactionDTO;
+import com.dvlcube.app.dto.filter.FactionFilterDTO;
 import com.dvlcube.app.model.Faction;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class FactionMapper implements GenericMapper<Faction, FactionDTO>, FilterMapper<Faction, FactionDTO> {
+public class FactionMapper implements GenericMapper<Faction, FactionDTO>, FilterMapper<Faction, FactionFilterDTO> {
     @Override
-    public Faction convertFilterToEntity(FactionDTO filterDTO) {
+    public Faction convertFilterToEntity(FactionFilterDTO filterDTO) {
         return Faction.builder().build();
     }
 

@@ -2,14 +2,15 @@ package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.FusionDTO;
 import com.dvlcube.app.dto.HeroDTO;
+import com.dvlcube.app.dto.filter.HeroFilterDTO;
 import com.dvlcube.app.model.Fusion;
 import com.dvlcube.app.model.Hero;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class HeroMapper implements GenericMapper<Hero, HeroDTO>, FilterMapper<Hero, HeroDTO> {
+public class HeroMapper implements GenericMapper<Hero, HeroDTO>, FilterMapper<Hero, HeroFilterDTO> {
     @Override
-    public Hero convertFilterToEntity(HeroDTO filterDTO) {
+    public Hero convertFilterToEntity(HeroFilterDTO filterDTO) {
         return Hero.builder().build();
     }
 

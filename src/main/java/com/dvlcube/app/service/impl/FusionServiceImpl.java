@@ -16,7 +16,7 @@ public class FusionServiceImpl extends GenericServiceImpl<Faction, Long> impleme
 
     private FactionMapper mapper;
 
-    public FusionServiceImpl(FactionMapper mapper) {
-        this.mapper = mapper;
+    public FusionServiceImpl() {
+        this.mapper = new FactionMapper();
     }
 }

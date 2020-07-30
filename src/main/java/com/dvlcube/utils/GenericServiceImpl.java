@@ -31,35 +31,32 @@ public abstract class GenericServiceImpl<E extends BaseEntity<ID>, ID extends Se
     }
 
     @Override
-    public ResponseEntity<E> get(ID id) {
-        E e = repository.findById(id).orElseThrow(() -> new RuntimeException(""));
-        return ResponseEntity.ok(e);
+    public E get(ID id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException(""));
     }
 
     @Override
-    public ResponseEntity<E> add(E entity) {
+    public E add(E entity) {
         return saveOrUpdate(entity);
     }
 
     @Override
-    public ResponseEntity<E> update(E entity) {
+    public E update(E entity) {
         return saveOrUpdate(entity);
     }
 
     @Transactional
-    public ResponseEntity<E> saveOrUpdate(E entity) {
+    public E saveOrUpdate(E entity) {
         try {
-            E e = repository.save(entity);
-            return ResponseEntity.ok(e);
+            return repository.save(entity);
         } catch (ConstraintViolationException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
 
     @Override
-    public ResponseEntity removeById(ID id) {
+    public void removeById(ID id) {
         repository.deleteById(id);
-        return ResponseEntity.ok().build();
     }
 
     @Override

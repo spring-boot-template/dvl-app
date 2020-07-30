@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
+import org.springframework.http.ResponseEntity;
 
 /**
  * Marker interface for REST service classes.
@@ -29,7 +30,7 @@ public interface MxBeanService<T extends MxBean<?>, S extends Serializable> {
 	 * @since 8 de mar de 2019
 	 * @author Ulisses Lima
 	 */
-	Optional<T> get(S id);
+	ResponseEntity<T> get(S id);
 
 	/**
 	 * Persiste uma nova instância de uma entidade.

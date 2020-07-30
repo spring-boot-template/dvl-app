@@ -15,7 +15,7 @@ public class BagHeroServiceImpl extends GenericServiceImpl<BagHero, Long> implem
 
     private BagHeroMapper mapper;
 
-    public BagHeroServiceImpl(BagHeroMapper mapper) {
-        this.mapper = mapper;
+    public BagHeroServiceImpl() {
+        this.mapper = new BagHeroMapper();
     }
 }

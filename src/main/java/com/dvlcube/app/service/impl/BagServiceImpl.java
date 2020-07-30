@@ -16,7 +16,7 @@ public class BagServiceImpl extends GenericServiceImpl<Bag,Long> implements BagS
 
     private BagMapper mapper;
 
-    public BagServiceImpl(BagMapper mapper) {
-        this.mapper = mapper;
+    public BagServiceImpl() {
+        this.mapper = new BagMapper();
     }
 }

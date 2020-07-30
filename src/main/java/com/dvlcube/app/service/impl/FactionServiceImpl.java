@@ -16,7 +16,7 @@ public class FactionServiceImpl extends GenericServiceImpl<Faction, Long> implem
 
     private FactionMapper mapper;
 
-    public FactionServiceImpl(FactionMapper mapper) {
-        this.mapper = mapper;
+    public FactionServiceImpl() {
+        this.mapper = new FactionMapper();
     }
 }

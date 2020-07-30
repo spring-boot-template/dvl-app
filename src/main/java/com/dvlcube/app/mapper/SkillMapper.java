@@ -2,15 +2,18 @@ package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.HeroDTO;
 import com.dvlcube.app.dto.SkillDTO;
+import com.dvlcube.app.dto.filter.SkillFilterDTO;
 import com.dvlcube.app.model.Hero;
 import com.dvlcube.app.model.Skill;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class SkillMapper implements GenericMapper<Skill, SkillDTO>, FilterMapper<Skill, SkillDTO> {
+public class SkillMapper implements GenericMapper<Skill, SkillDTO>, FilterMapper<Skill, SkillFilterDTO> {
     @Override
-    public Skill convertFilterToEntity(SkillDTO filterDTO) {
-        return Skill.builder().build();
+    public Skill convertFilterToEntity(SkillFilterDTO filterDTO) {
+        return Skill.builder()
+                .name(filterDTO.getName())
+                .build();
     }
 
     @Override

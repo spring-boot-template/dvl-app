@@ -16,7 +16,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
 
     private UserMapper mapper;
 
-    public UserServiceImpl(UserMapper mapper) {
-        this.mapper = mapper;
+    public UserServiceImpl() {
+        this.mapper = new UserMapper();
     }
 }

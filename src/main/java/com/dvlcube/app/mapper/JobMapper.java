@@ -1,13 +1,14 @@
 package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.JobDTO;
+import com.dvlcube.app.dto.filter.JobFilterDTO;
 import com.dvlcube.app.model.Job;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class JobMapper implements GenericMapper<Job, JobDTO>, FilterMapper<Job, JobDTO> {
+public class JobMapper implements GenericMapper<Job, JobDTO>, FilterMapper<Job, JobFilterDTO> {
     @Override
-    public Job convertFilterToEntity(JobDTO filterDTO) {
+    public Job convertFilterToEntity(JobFilterDTO filterDTO) {
         return Job.builder().build();
     }
 

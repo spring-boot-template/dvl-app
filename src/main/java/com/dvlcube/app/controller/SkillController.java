@@ -8,8 +8,15 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.dvlcube.app.dto.SkillDTO;
+import com.dvlcube.app.dto.filter.SkillFilterDTO;
+import com.dvlcube.app.mapper.SkillMapper;
 import com.dvlcube.app.rest.GenericRestResponse;
+import com.dvlcube.app.service.SkillService;
+import com.dvlcube.utils.GenericMapper;
+import com.dvlcube.utils.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvlcube.app.interfaces.MenuItem;
-import com.dvlcube.app.repository.SkillRepository;
 import com.dvlcube.app.model.Skill;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
@@ -32,28 +38,47 @@ import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 @RestController
 @MenuItem(value = CONFIGURATION)
 @RequestMapping("${dvl.rest.prefix}/skills")
-public class SkillController implements MxFilterableBeanService<Skill, Long> {
+public class SkillController implements MxFilterableBeanService<SkillDTO, Long>, ListRest<Skill, SkillMapper, SkillFilterDTO, SkillDTO, Long> {
+
+	private SkillService service;
+
+	@Override
+	public GenericMapper<Skill, SkillDTO> getMapper() {
+		return new SkillMapper();
+	}
+
+	@Override
+	public SkillMapper getFilterMapper() {
+		return new SkillMapper();
+	}
+
+	@Override
+	public GenericService<Skill, Long> getService() {
+		return service;
+	}
 
 	@Autowired
-	private SkillRepository repo;
+	public SkillController(SkillService service) {
+		this.service = service;
+	}
 
 	@Override
 	@GetMapping
-	public Iterable<Skill> get(@RequestParam Map<String, String> params) {
-		return repo.firstPage();
+	public Iterable<SkillDTO> get(@RequestParam Map<String, String> params) {
+		return service.firstPage();
 	}
 
 	@Override
 	@GetMapping("/{id}")
-	public Optional<Skill> get(@PathVariable Long id) {
-		return repo.findById(id);
+	public ResponseEntity<SkillDTO> get(@PathVariable Long id) {
+		return service.findById(id);
 	}
 
 	@Override
 	@PostMapping
-	public MxRestResponse post(@Valid @RequestBody Skill body) {
-		Skill save = repo.save(body);
-		return GenericRestResponse.ok(save.getId());
+	public MxRestResponse post(@Valid @RequestBody SkillDTO body) {
+		ResponseEntity<SkillDTO> save = service.add(body);
+		return GenericRestResponse.ok(save.getBody().getId());
 	}
 
 	/**
@@ -63,8 +88,8 @@ public class SkillController implements MxFilterableBeanService<Skill, Long> {
 	 * @author Ulisses Lima
 	 */
 	@GetMapping("/filtered")
-	public List<Skill> getFiltered(@RequestParam Map<String, String> params) {
-		return repo.findAllBy(params);
+	public ResponseEntity<List<SkillDTO>> getFiltered(@RequestParam Map<String, String> params) {
+		return service.findAllBy(params);
 	}
 
 	/**
@@ -75,17 +100,17 @@ public class SkillController implements MxFilterableBeanService<Skill, Long> {
 	 * @author Ulisses Lima
 	 */
 	@GetMapping("/group/{group}/filtered")
-	public List<Skill> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
-		return repo.findAllBy(params, group);
+	public ResponseEntity<List<SkillDTO>> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
+		return service.findAllBy(params, group);
 	}
 
 	@GetMapping("/like")
-	public Iterable<Skill> getLike(@RequestParam(required = true) String id) {
-		return repo.findAllLike(id);
+	public ResponseEntity<Iterable<SkillDTO>> getLike(@RequestParam String id) {
+		return service.findAllLike(id);
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		repo.deleteById(id);
+		service.delete(id);
 	}
 }

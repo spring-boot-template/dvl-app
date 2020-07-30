@@ -63,8 +63,7 @@ public class User implements MxBean<Long>, BaseEntity<Long> {
 	@JsonIgnore
 	private String password;
 
-	@UpdateTimestamp
-	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastActivity;
 
 	private Integer requests;

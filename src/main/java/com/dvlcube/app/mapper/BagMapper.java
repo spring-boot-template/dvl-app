@@ -1,14 +1,15 @@
 package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.BagDTO;
+import com.dvlcube.app.dto.filter.BagFilterDTO;
 import com.dvlcube.app.model.Bag;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class BagMapper implements GenericMapper<Bag, BagDTO>, FilterMapper<Bag, BagDTO> {
+public class BagMapper implements GenericMapper<Bag, BagDTO>, FilterMapper<Bag, BagFilterDTO> {
 
     @Override
-    public Bag convertFilterToEntity(BagDTO filterDTO) {
+    public Bag convertFilterToEntity(BagFilterDTO filterDTO) {
         return Bag.builder().build();
     }
 
@@ -21,7 +22,6 @@ public class BagMapper implements GenericMapper<Bag, BagDTO>, FilterMapper<Bag, 
                 .share(dto.getShare())
                 .url(dto.getUrl())
                 .owner(new UserMapper().convertToEntity(dto.getOwnerDTO()))
-                .heroList(new BagHeroMapper().convertToListEntity(dto.getBagHeroDTOs()))
                 .build();
     }
 
@@ -34,7 +34,6 @@ public class BagMapper implements GenericMapper<Bag, BagDTO>, FilterMapper<Bag, 
                 .share(entity.getShare())
                 .url(entity.getUrl())
                 .ownerDTO(new UserMapper().convertToDto(entity.getOwner()))
-                .bagHeroDTOs(new BagHeroMapper().covertToListDto(entity.getHeroList()))
                 .build();
     }
 }

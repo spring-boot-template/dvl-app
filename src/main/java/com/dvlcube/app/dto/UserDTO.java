@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.validation.constraints.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -34,4 +35,6 @@ public class UserDTO extends BaseDTO {
 
     @Positive
     private Integer requests;
+
+    private Date lastActivity;
 }

@@ -2,14 +2,15 @@ package com.dvlcube.app.mapper;
 
 import com.dvlcube.app.dto.BagDTO;
 import com.dvlcube.app.dto.BagHeroDTO;
+import com.dvlcube.app.dto.filter.BagHeroFilterDTO;
 import com.dvlcube.app.model.Bag;
 import com.dvlcube.app.model.BagHero;
 import com.dvlcube.utils.FilterMapper;
 import com.dvlcube.utils.GenericMapper;
 
-public class BagHeroMapper implements GenericMapper<BagHero, BagHeroDTO>, FilterMapper<BagHero, BagHeroDTO> {
+public class BagHeroMapper implements GenericMapper<BagHero, BagHeroDTO>, FilterMapper<BagHero, BagHeroFilterDTO> {
     @Override
-    public BagHero convertFilterToEntity(BagHeroDTO filterDTO) {
+    public BagHero convertFilterToEntity(BagHeroFilterDTO filterDTO) {
         return BagHero.builder().build();
     }
 

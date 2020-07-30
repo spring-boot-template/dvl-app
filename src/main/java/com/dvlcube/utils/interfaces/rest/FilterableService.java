@@ -2,6 +2,7 @@ package com.dvlcube.utils.interfaces.rest;
 
 import com.dvlcube.app.repository.DvlJpaRepository;
 import com.dvlcube.utils.interfaces.MxBean;
+import org.springframework.http.ResponseEntity;
 
 /**
  * @since 2 de mai de 2019
@@ -18,5 +19,5 @@ public interface FilterableService<B extends MxBean<?>> {
 	 * @since 2 de mai de 2019
 	 * @author Ulisses Lima
 	 */
-	Iterable<B> getLike(String id);
+	ResponseEntity<Iterable<B>> getLike(String id);
 }
