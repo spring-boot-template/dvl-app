@@ -32,11 +32,14 @@ public class CorsFilter implements Filter {
 		String accessControl = "Access-Control-Allow-Origin";
 		String allowCredentials = "Access-Control-Allow-Credentials";
 
-		String origin = System.getProperty(accessControl, "*");
+//		String origin = System.getProperty(accessControl, "*");
 		String allow = System.getProperty(allowCredentials, "true");
 
+
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		response.setHeader(accessControl, origin);
+
+		response.setHeader(accessControl, request.getHeader("Origin"));
 		response.setHeader(allowCredentials, allow);
 		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS, POST, PUT");
 		response.setHeader("Access-Control-Allow-Headers",

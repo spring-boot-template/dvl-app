@@ -24,17 +24,19 @@ public class JobServiceImpl extends GenericServiceImpl<Job, Long> implements Job
 
     @Override
     public ResponseEntity add(JobDTO dto) {
-        mapper.convertToDto(super.add(mapper.convertToEntity(dto)));
-        return null;
+        JobDTO newJob = mapper.convertToDto(super.add(mapper.convertToEntity(dto)));
+        return ResponseEntity.ok(newJob);
     }
 
     @Override
     public ResponseEntity find(Long id) {
-        return null;
+        JobDTO dto = mapper.convertToDto(super.get(id));
+        return ResponseEntity.ok(dto);
     }
 
     @Override
     public ResponseEntity delete(Long id) {
-        return null;
+        super.removeById(id);
+        return ResponseEntity.ok().build();
     }
 }

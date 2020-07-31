@@ -18,6 +18,8 @@ public interface GenericService<E extends BaseEntity<ID>, ID > {
 
     Page<E> getAllPaginated(Example<E> example, Pageable pageable);
 
+    Page<E> getAllPaginated(Pageable pageable);
+
     E get(ID id);
 
     void removeById(ID id);

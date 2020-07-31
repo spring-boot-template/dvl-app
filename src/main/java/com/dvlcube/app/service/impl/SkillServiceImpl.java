@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class SkillServiceImpl extends GenericServiceImpl<Skill, Long> implements SkillService {
@@ -58,6 +59,20 @@ public class SkillServiceImpl extends GenericServiceImpl<Skill, Long> implements
     public ResponseEntity<Iterable<SkillDTO>> findAllLike(String id) {
         List<Skill> skills = repository.findAllLike(id);
         return ResponseEntity.ok(mapper.covertToListDto(skills));
+    }
+
+    @Override
+    public ResponseEntity findByName(String name) {
+        Optional<Skill> op = repository.findByNameLike(name);
+        if(!op.isPresent())
+            return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(mapper.convertToDto(op.get()));
+    }
+
+    @Override
+    public ResponseEntity<Boolean> findByNameReturnBool(String name) {
+        Optional<Skill> op = repository.findByNameLike(name);
+        return ResponseEntity.ok(op.isPresent());
     }
 
     @Override

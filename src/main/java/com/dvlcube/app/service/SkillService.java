@@ -17,5 +17,7 @@ public interface SkillService extends GenericService<Skill, Long> {
     ResponseEntity<List<SkillDTO>> findAllBy(Map<String,String> params);
     ResponseEntity<List<SkillDTO>> findAllBy(Map<String,String> params, String group);
     ResponseEntity<Iterable<SkillDTO>> findAllLike(String id);
+    ResponseEntity findByName(String name);
+    ResponseEntity<Boolean> findByNameReturnBool(String name);
     void delete(Long id);
 }

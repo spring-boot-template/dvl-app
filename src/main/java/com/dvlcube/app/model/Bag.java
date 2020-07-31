@@ -20,6 +20,8 @@ import lombok.*;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "bagbean",uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "owner_id" }) })
 public class Bag implements Owned, MxBean<Long>, Nameable, Presentable, BaseEntity<Long> {

@@ -31,6 +31,11 @@ public abstract class GenericServiceImpl<E extends BaseEntity<ID>, ID extends Se
     }
 
     @Override
+    public Page<E> getAllPaginated(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    @Override
     public E get(ID id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException(""));
     }

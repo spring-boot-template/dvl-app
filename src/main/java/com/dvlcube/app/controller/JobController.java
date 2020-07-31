@@ -52,12 +52,14 @@ public class JobController implements ListRest<Job, JobMapper, JobFilterDTO, Job
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JobDTO> find(@ApiParam(value = "id", required = true) Long id){
+    @ApiOperation("Find by id Job")
+    public ResponseEntity<JobDTO> find(@ApiParam(value = "id", required = true) @PathVariable Long id){
         return service.find(id);
     }
 
-    @DeleteMapping
-    public ResponseEntity delete(@ApiParam(value = "id", required = true) Long id){
+    @DeleteMapping("/{id}")
+    @ApiOperation("Delete Job by id")
+    public ResponseEntity delete(@ApiParam(value = "id", required = true) @PathVariable Long id){
         return service.delete(id);
     }
 }

@@ -19,6 +19,8 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "skillbean",uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Skill implements Nameable, MxBean<Long>, Presentable, BaseEntity<Long> {

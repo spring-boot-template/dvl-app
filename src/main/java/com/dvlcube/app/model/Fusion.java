@@ -20,6 +20,8 @@ import lombok.*;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "fusionbean",uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "owner_id" }) })
 public class Fusion implements MxBean<Long>, Nameable, Presentable, Owned, BaseEntity<Long> {

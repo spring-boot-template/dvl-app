@@ -19,6 +19,8 @@ import lombok.*;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "herobean",uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Hero implements MxBean<Long>, Nameable, Presentable, BaseEntity<Long> {

@@ -19,6 +19,8 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "factionbean",uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
 public class Faction implements MxBean<Long>, Nameable, Presentable, BaseEntity<Long> {

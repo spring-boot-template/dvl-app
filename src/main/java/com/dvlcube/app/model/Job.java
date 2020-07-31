@@ -17,6 +17,8 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "jobbean")
 public class Job implements MxBean<Long>, Nameable, BaseEntity<Long> {
 	private static final long serialVersionUID = 1L;

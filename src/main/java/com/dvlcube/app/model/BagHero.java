@@ -16,6 +16,8 @@ import lombok.*;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(name = "bagherobean")
 public class BagHero implements MxBean<Long>, Nameable, BaseEntity<Long> {

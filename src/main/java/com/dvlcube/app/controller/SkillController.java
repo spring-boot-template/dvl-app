@@ -15,16 +15,11 @@ import com.dvlcube.app.rest.GenericRestResponse;
 import com.dvlcube.app.service.SkillService;
 import com.dvlcube.utils.GenericMapper;
 import com.dvlcube.utils.GenericService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.dvlcube.app.interfaces.MenuItem;
 import com.dvlcube.app.model.Skill;
@@ -112,5 +107,17 @@ public class SkillController implements MxFilterableBeanService<SkillDTO, Long>,
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
+	}
+
+	@GetMapping("/name/{name}")
+	@ApiOperation("Find Skill with name")
+	public ResponseEntity findByName(@ApiParam(value = "name", required = true) @PathVariable String name){
+		return service.findByName(name);
+	}
+
+	@GetMapping("/exists/name/{name}")
+	@ApiOperation("Find Skill with name and return Boolean")
+	public ResponseEntity findByNameAndReturnBoolean(@ApiParam(value = "name", required = true) @PathVariable String name){
+		return service.findByNameReturnBool(name);
 	}
 }

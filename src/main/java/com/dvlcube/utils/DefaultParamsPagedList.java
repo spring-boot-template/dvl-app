@@ -14,6 +14,7 @@ import java.lang.annotation.Target;
         @ApiImplicitParam(name = "page", required = true, dataType = "int", defaultValue = "0", paramType = "query"),
         @ApiImplicitParam(name = "count", dataType = "int", defaultValue = "25", paramType = "query"),
         @ApiImplicitParam(name = "order", dataType = "string", defaultValue = "ASC", paramType = "query"),
-        @ApiImplicitParam(name = "sortProperty", dataType = "string", defaultValue = "id", paramType = "query")})
+        @ApiImplicitParam(name = "sortProperty", dataType = "string", defaultValue = "id", paramType = "query"),
+        @ApiImplicitParam(name = "like", dataType = "boolean", defaultValue = "false", paramType = "query")})
 public @interface DefaultParamsPagedList {
 }
