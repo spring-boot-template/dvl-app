@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.dvlcube.app.manager.data.e.Menu;
+import com.dvlcube.app.Enum.Menu;
 
 /**
  * Represents a menu item.

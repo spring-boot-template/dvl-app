@@ -7,8 +7,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.dvlcube.app.manager.data.UserBean;
 import com.dvlcube.app.conf.ApplicationConfig;
+import com.dvlcube.app.model.UserBean;
 
 /**
  * @see ApplicationConfig
