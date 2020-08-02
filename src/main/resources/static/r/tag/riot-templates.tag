@@ -79,7 +79,7 @@ this.state = {
 <footer class="page-footer secondary">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
+            <div class="center col l12 s12">
                 <h5 class="white-text">DVL Manager v<get data-url="/env/version" /></h5>
                 <p class="grey-text text-lighten-4">
                     Manage everything.
@@ -87,10 +87,10 @@ this.state = {
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
+    <div class="footer-copyright center deep-purple accent-4">
         <div class="container">
-            dvl-core.it
-        </div>
+            Victor dos Santos Pinho
+        </div>       
     </div>
 </footer>
 </ls-footer>
