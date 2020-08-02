@@ -3,12 +3,11 @@ package com.dvlcube.app;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.dvlcube.app.conf.ApplicationConfig;
-import com.dvlcube.app.model.UserBean;
+import com.dvlcube.app.manager.data.UserBean;
 
 /**
  * @see ApplicationConfig
@@ -22,10 +21,10 @@ import com.dvlcube.app.model.UserBean;
 @EntityScan(basePackageClasses = UserBean.class)
 public class DvlApplication {
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(DvlApplication.class, args);
+SpringApplication.run(DvlApplication.class, args);/*ConfigurableApplicationContext context = SpringApplication.run(DvlApplication.class, args);
 		int i = 1;
 		for (String name : context.getBeanDefinitionNames()) {
 			System.out.println(i++ + " scanned. " + name);
-		}
+		}*/
 	}
 }

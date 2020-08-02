@@ -3,7 +3,7 @@ package com.dvlcube.app.rest.vo;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.dvlcube.app.Enum.Menu;
+import com.dvlcube.app.manager.data.e.Menu;
 
 /**
  * Menu group object.

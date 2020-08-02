@@ -8,10 +8,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.springframework.context.annotation.Configuration;
 
-import com.dvlcube.app.interfaces.MxBean;
-import com.dvlcube.app.service.StatService;
+import com.dvlcube.app.rest.StatService;
 import com.dvlcube.utils.aspects.stats.StatsAspect;
 import com.dvlcube.utils.interfaces.MxAspect;
+import com.dvlcube.utils.interfaces.MxBean;
 
 /**
  * Logs all HTTP requests, generating stats about the time it takes to run every
