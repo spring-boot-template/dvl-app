@@ -50,7 +50,7 @@ public class MenuService implements MxService {
 			String simpleName = bean.replace("Service", "");
 			String path = "";
 			boolean readOnly = false;
-			Menu group = Menu.MISC;
+			Menu group = Menu.JOBS;
 			try {
 				Class<?> c = Class.forName(definition.getBeanClassName());
 				MenuItem menuDefinition = c.getAnnotation(MenuItem.class);
