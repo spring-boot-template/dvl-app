@@ -1,60 +1,58 @@
 <!doctype html>
 <html>
-    <head title="Job">
-    	<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
-    	<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
-    	<script type="text/javascript" src="/r/js/vue.js"></script>
-    	<script type="text/javascript" src="/r/js/vue-components.js"></script>
-    	<script type="text/javascript" src="/r/js/app.js"></script>
-    	<script type="text/javascript" src="/r/js/tags.js"></script>
-    	<script type="text/javascript" src="/r/js/form.js"></script>
-    	<script type="text/javascript" src="/r/js/riot.js"></script>
-    </head>
-    <body>
-        <ls-header></ls-header>
-        
-        <div class="section no-pad-bot" id="vue-item">
-            <div class="container center">
-                <h1 class="header center secondary-text">{{ item.name }} Job</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light">{{ item.max }}.</h5>
-                </div>
-                
-                
-                <div class="row center">
-                    <form id="form" name="jobs" class="col s12">
-                    	<input type="hidden" id="id" name="id" :value="item.id">
-                    	
-                        <div class="row">
-                            <div class="input-field col s6 m6 l6">
-                                <input name="name" v-model="item.name" type="text" placeholder="Job name">
-                                <label>Name</label>
-                            </div>
-                        </div>
-                   
-                        <div class="row">
-                            <div class="input-field col s6 m6 l6">
-                                <input name="max" v-model="item.max" type="text" placeholder="Job max">
-                                <label>Max</label>
-                            </div>
-                        </div>
+<head title="Job">
+<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
+<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
+<script type="text/javascript" src="/r/js/vue.js"></script>
+<script type="text/javascript" src="/r/js/vue-components.js"></script>
+<script type="text/javascript" src="/r/js/app.js"></script>
+<script type="text/javascript" src="/r/js/tags.js"></script>
+<script type="text/javascript" src="/r/js/form.js"></script>
+<script type="text/javascript" src="/r/js/riot.js"></script>
+</head>
+<body>
+	<ls-header></ls-header>
 
-                        <a id="return" href="./list.htm" class="btn waves-effect waves-light tooltipped" 
-                        	data-tooltip="Return to list">
-                            <i class="material-icons">keyboard_return</i>
-                        </a>
-                        
-                        <ls-delete from="jobs" />
-                    </form>
-                </div>
-            </div>
-        </div>
+	<div class="section no-pad-bot" id="vue-item">
+		<div class="container center">
+			<h1 class="header center secondary-text">{{ item.name }} Job</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">{{ item.max }}.</h5>
+			</div>
 
-		<ls-footer>
-	        <script type="text/javascript">
-	        	riot.mount('*');
-	        	App.get("jobs/"+App.hash());
-	        </script>
-        </ls-footer>
-    </body>
+
+			<div class="row center">
+				<form id="form" name="jobs" class="col s12">
+					<input type="hidden" id="id" name="id" :value="item.id">
+
+					<div class="row">
+						<div class="input-field col s6 m6 l6">
+							<input name="name" v-model="item.name" type="text"
+								placeholder="Job name"> <label>Name</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s6 m6 l6">
+							<input name="max" v-model="item.max" type="text"
+								placeholder="Job max"> <label>Max</label>
+						</div>
+					</div>
+
+					<a id="return" href="./list.htm"
+						class="btn waves-effect waves-light tooltipped"
+						data-tooltip="Return to list"> <i class="material-icons">keyboard_return</i>
+					</a>
+
+					<ls-delete from="jobs" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<ls-footer> <script type="text/javascript">
+		riot.mount('*');
+		App.get("jobs/" + App.hash());
+	</script> </ls-footer>
+</body>
 </html>
