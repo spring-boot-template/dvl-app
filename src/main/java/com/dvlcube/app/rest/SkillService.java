@@ -1,7 +1,5 @@
 package com.dvlcube.app.rest;
 
-import static com.dvlcube.app.manager.data.e.Menu.CONFIGURATION;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dvlcube.app.interfaces.MenuItem;
 import com.dvlcube.app.jpa.repo.SkillRepository;
 import com.dvlcube.app.manager.data.SkillBean;
+import com.dvlcube.app.manager.data.e.Menu;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 
@@ -29,7 +28,7 @@ import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
  * @author Ulisses Lima
  */
 @RestController
-@MenuItem(value = CONFIGURATION)
+@MenuItem(value = Menu.SKILL)
 @RequestMapping("${dvl.rest.prefix}/skills")
 public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 

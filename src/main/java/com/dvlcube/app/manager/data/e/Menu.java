@@ -10,8 +10,8 @@ import static com.dvlcube.utils.query.MxQuery.$;
  */
 public enum Menu {
 	MAIN,
-	CONFIGURATION,
 	STATS,
+	SKILL,
 	MONITORING,
 	JOBS,
 	MISC
