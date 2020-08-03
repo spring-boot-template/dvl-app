@@ -19,8 +19,8 @@
                     <table id="vue-list" class="responsive-table highlight">
                         <thead>
                             <tr>
-                                <th>name</th>
-                                <th>description</th>
+                                <th>Name</th>
+                                <th>Max</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,7 +29,7 @@
                                 :data-href="'./edit.htm#'+item.id"
                                 v-for="item in list">
                                 <td>{{ item.name }}</td>
-                                <td>{{ item.description }}</td>
+                                <td>{{ item.max }}</td>
                             </tr>
                         </tbody>
                     </table>
