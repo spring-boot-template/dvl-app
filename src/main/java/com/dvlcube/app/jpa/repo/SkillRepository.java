@@ -13,6 +13,8 @@ import com.dvlcube.app.manager.data.SkillBean;
 @Repository
 public interface SkillRepository extends DvlRepository<SkillBean, Long>, BasicRepository<SkillBean, Long> {
 
-	Iterable<SkillBean> findByNameIgnoreCaseContaining(String name);
+	Iterable<SkillBean> findByName(String name);
+
+	boolean existsByName(String name);
 
 }

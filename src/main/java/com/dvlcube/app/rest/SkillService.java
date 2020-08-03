@@ -89,7 +89,12 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	
 	@GetMapping("/name/{name}")
 	public Iterable<SkillBean> getLikeSkill(@PathVariable(required = true) String name) {
-		return repo.findByNameIgnoreCaseContaining(name);
+		return repo.findByName(name);
+	}
+	
+	@GetMapping("/exists/name/{name}")
+	public boolean getExistsSkill(@PathVariable(required = true) String name) {
+		return repo.existsByName(name);
 	}
 
 }
