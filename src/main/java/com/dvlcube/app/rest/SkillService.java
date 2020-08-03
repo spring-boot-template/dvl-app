@@ -86,5 +86,10 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	public void delete(@PathVariable Long id) {
 		repo.deleteById(id);
 	}
+	
+	@GetMapping("/name/{name}")
+	public Iterable<SkillBean> getLikeSkill(@PathVariable(required = true) String name) {
+		return repo.findByNameIgnoreCaseContaining(name);
+	}
 
 }
