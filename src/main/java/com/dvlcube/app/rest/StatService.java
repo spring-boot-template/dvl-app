@@ -44,9 +44,9 @@ public class StatService implements MxService {
 	 */
 	@GetMapping
 	public List<Stat> get(@RequestParam Map<String, String> params) {
-		List<Stat> statList = Stats.values();
-		
-		return statList;
+		return Stats.values().stream().sorted(Comparator
+				.comparingLong(Stat::getTotal).reversed())
+				.collect(Collectors.toList());
 	}
 
 	/**
