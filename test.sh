@@ -3,6 +3,10 @@
 mydir=$(dirname `readlink -f $0`)
 me=$(readlink -f $0)
 app=dvl-app
+core=dvl-core
+corev='1.0.1'
+
+NAMESPACE='http://maven.apache.org/POM/4.0.0'
 
 if [[ -n "$1" ]]; then
 	altdir="$(readlink -f $1)"
@@ -46,19 +50,37 @@ echo "https://www.linkedin.com/in/${linkedin_name}/"
 api_base_url="http://localhost:${port}/${linkedin_name:0:3}"
 web_base_url="http://localhost:${port}"
 
+cd $mydir
+git pull
+
 if [[ -n "${port}" ]]; then
 	logs=/tmp/${app}-test.out
-	cd $mydir
+
+	pom=pom.xml
+	dvl_core_v=$(xmlstarlet sel -N x=$NAMESPACE -t -v "x:project/x:dependencies/x:dependency[x:artifactId='$core']/x:version" $pom)
+	echo "dvl-core version: $dvl_core_v"
+
+	if [[ "$dvl_core_v" != "$corev" ]]; then
+		xmlstarlet ed -L -N x="$NAMESPACE" \
+			-u "x:project/x:dependencies/x:dependency[x:artifactId='$core']/x:version" -v "$corev" \
+			$pom
+
+		dvl_core_v=$(xmlstarlet sel -N x=$NAMESPACE -t -v "x:project/x:dependencies/x:dependency[x:artifactId='$core']/x:version" $pom)
+		echo "dvl-core version changed: $dvl_core_v"
+	fi
+
 	nohup ./mvnw spring-boot:run &> $logs&
 	pid=$!
 	echo "starting server. pid: $pid, logs: $logs"
 
 	while [[ -n "$(assert-up.sh $web_base_url 2>&1)" ]]
 	do
-		echo "waiting for $web_base_url ... ctrl+c to skip"
+		echo "waiting for $web_base_url ... ctrl+c to break"
 		tail $logs
 		sleep 5
 	done
+else
+	echo "server won't start"	
 fi
 
 #echo && echo "local server:"
@@ -199,6 +221,7 @@ test_4_JOBS() {
 		points=$((points+1))
 	fi
 	
+	>&2 echo "points=$points"
 	result "[ \$points == 4 ]"
 }
 
