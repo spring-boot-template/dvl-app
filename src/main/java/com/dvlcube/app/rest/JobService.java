@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvlcube.app.interfaces.MenuItem;
-import com.dvlcube.app.jpa.repo.SkillRepository;
-import com.dvlcube.app.manager.data.SkillBean;
+import com.dvlcube.app.jpa.repo.JobRepository;
+import com.dvlcube.app.manager.data.JobBean;
 import com.dvlcube.app.manager.data.e.Menu;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
@@ -28,73 +28,63 @@ import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
  * @author Ulisses Lima
  */
 @RestController
-@MenuItem(value = Menu.SKILL)
-@RequestMapping("${dvl.rest.prefix}/skills")
-public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
+@MenuItem(value = Menu.JOBS)
+@RequestMapping("${dvl.rest.prefix}/jobs")
+public class JobService implements MxFilterableBeanService<JobBean, Long> {
 
 	@Autowired
-	private SkillRepository repo;
+	private JobRepository repo;
 
 	@Override
 	@GetMapping
-	public Iterable<SkillBean> get(@RequestParam Map<String, String> params) {
+	public Iterable<JobBean> get(@RequestParam Map<String, String> params) {
 		return repo.firstPage();
 	}
 
 	@Override
 	@GetMapping("/{id}")
-	public Optional<SkillBean> get(@PathVariable Long id) {
+	public Optional<JobBean> get(@PathVariable Long id) {
 		return repo.findById(id);
 	}
 
 	@Override
 	@PostMapping
-	public MxRestResponse post(@Valid @RequestBody SkillBean body) {
-		SkillBean save = repo.save(body);
+	public MxRestResponse post(@Valid @RequestBody JobBean body) {
+		JobBean save = repo.save(body);
 		return GenericRestResponse.ok(save.getId());
 	}
 
 	/**
 	 * @param params
-	 * @return List<SkillBean>
+	 * @return List<JobBean>
 	 * @since 18 de abr de 2019
 	 * @author Ulisses Lima
 	 */
 	@GetMapping("/filtered")
-	public List<SkillBean> getFiltered(@RequestParam Map<String, String> params) {
+	public List<JobBean> getFiltered(@RequestParam Map<String, String> params) {
 		return repo.findAllBy(params);
 	}
 
 	/**
 	 * @param group
 	 * @param params
-	 * @return List<SkillBean>
+	 * @return List<JobBean>
 	 * @since 18 de abr de 2019
 	 * @author Ulisses Lima
 	 */
 	@GetMapping("/group/{group}/filtered")
-	public List<SkillBean> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
+	public List<JobBean> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
 		return repo.findAllBy(params, group);
 	}
 
 	@GetMapping("/like")
-	public Iterable<SkillBean> getLike(@RequestParam(required = true) String id) {
+	public Iterable<JobBean> getLike(@RequestParam(required = true) String id) {
 		return repo.findAllLike(id);
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repo.deleteById(id);
-	}
-	
-	@GetMapping("/name/{name}")
-	public Iterable<SkillBean> getLikeSkill(@PathVariable(required = true) String name) {
-		return repo.findByName(name);
-	}
-	
-	@GetMapping("/exists/name/{name}")
-	public boolean getExistsSkill(@PathVariable(required = true) String name) {
-		return repo.existsByName(name);
 	}
 
 }

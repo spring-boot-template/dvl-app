@@ -42,8 +42,8 @@ public class MenuService implements MxService {
 
 		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);
 		scanner.addIncludeFilter(new AnnotationTypeFilter(MenuItem.class));
-
-		scanner.findCandidateComponents(this.getClass().getPackageName()).forEach(definition -> {
+        // Ainda tenho que entender porque estava 'this.getClass().getPackageName()'
+		scanner.findCandidateComponents(this.getClass().getPackage().getName()).forEach(definition -> {
 			String[] strings = definition.getBeanClassName().split("\\.");
 			String bean = strings[strings.length - 1];
 

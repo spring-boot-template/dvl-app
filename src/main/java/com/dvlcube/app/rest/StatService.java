@@ -4,8 +4,10 @@ import static com.dvlcube.app.manager.data.e.Menu.MONITORING;
 import static com.dvlcube.utils.query.MxQuery.$;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +29,7 @@ import com.dvlcube.utils.interfaces.MxService;
  * @since 17 de abr de 2019
  * @author Ulisses Lima
  */
+
 @RestController
 @MenuItem(value = MONITORING, readOnly = true)
 @RequestMapping("${dvl.rest.prefix}/stats")
@@ -41,7 +44,13 @@ public class StatService implements MxService {
 	 */
 	@GetMapping
 	public List<Stat> get(@RequestParam Map<String, String> params) {
-		return Stats.values();
+		return Stats.values()
+				.stream()
+				.sorted(Comparator.comparing(Stat::getTotal)
+				.thenComparing(Stat::savg)
+				.reversed())
+				.collect(Collectors
+				.toList());
 	}
 
 	/**

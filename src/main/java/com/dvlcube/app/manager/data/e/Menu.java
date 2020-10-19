@@ -9,11 +9,12 @@ import static com.dvlcube.utils.query.MxQuery.$;
  * @author Ulisses Lima
  */
 public enum Menu {
-	MAIN, //
-	CONFIGURATION, //
-	STATS, //
-	MONITORING, //
-	MISC, //
+	MAIN,
+	STATS,
+	SKILL,
+	MONITORING,
+	JOBS,
+	MISC
 	;
 	private Menu() {
 		this.label = $(name()).decapitalize().replace("_", " ").o;
