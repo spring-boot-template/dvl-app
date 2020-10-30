@@ -78,8 +78,8 @@ public class SkillRest implements MxFilterableBeanService<SkillBean, Long> {
 	}
 
 	@GetMapping("/like")
-	public Iterable<SkillBean> getLike(@RequestParam(required = true) String id) {
-		return skillService.findAllLike(id);
+	public Iterable<SkillBean> getLike(@RequestParam(required = true) String name) {
+		return skillService.findAllByNameLike(name);
 	}
 
 	@DeleteMapping("/{id}")

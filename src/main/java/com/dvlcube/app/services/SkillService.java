@@ -34,8 +34,8 @@ public class SkillService {
         return this.skillRepository.findAllBy(params, group);
     }
 
-    public Iterable<SkillBean> findAllLike(String id){
-        return this.skillRepository.findAllLike(id);
+    public Iterable<SkillBean> findAllByNameLike(String name){
+        return this.skillRepository.findAllByNameLike(name);
     }
 
     public void deleteById(Long id){

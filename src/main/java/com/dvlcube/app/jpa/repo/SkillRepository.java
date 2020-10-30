@@ -13,4 +13,5 @@ import com.dvlcube.app.jpa.DvlRepository;
 @Repository
 public interface SkillRepository extends DvlRepository<SkillBean, Long>, BasicRepository<SkillBean, Long> {
     public Iterable<SkillBean> findAllByOrderByName();
+    public Iterable<SkillBean> findAllByNameLike(String name);
 }
