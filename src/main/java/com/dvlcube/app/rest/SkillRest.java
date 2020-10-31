@@ -82,6 +82,11 @@ public class SkillRest implements MxFilterableBeanService<SkillBean, Long> {
 		return skillService.findAllByNameLike(name);
 	}
 
+	@GetMapping("/name/{name}")
+	public Optional<SkillBean> findByName(@PathVariable String name) {
+		return skillService.findByName(name);
+	}
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		this.skillService.deleteById(id);

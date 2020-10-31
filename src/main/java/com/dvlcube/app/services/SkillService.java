@@ -41,4 +41,8 @@ public class SkillService {
     public void deleteById(Long id){
         this.skillRepository.deleteById(id);
     }
+
+    public Optional<SkillBean> findByName(String name){
+        return this.skillRepository.findByName(name);
+    }
 }
