@@ -2,6 +2,7 @@ package com.dvlcube.app.services;
 
 import com.dvlcube.app.jpa.repo.SkillRepository;
 import com.dvlcube.app.manager.data.SkillBean;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,12 @@ public class SkillService {
     }
 
     public SkillBean save(SkillBean skillBean) {
-        return this.skillRepository.save(skillBean);
+        SkillBean skill = new SkillBean();
+        if(skillBean.getId() != null) {
+            skill = this.findById(skillBean.getId()).get();
+        }
+        BeanUtils.copyProperties(skillBean, skill, SkillBean.ignoreProperties);
+        return this.skillRepository.save(skill);
     }
 
     public List<SkillBean> findAllBy(Map<String, String> params){

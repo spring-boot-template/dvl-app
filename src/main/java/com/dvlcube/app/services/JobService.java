@@ -2,6 +2,7 @@ package com.dvlcube.app.services;
 
 import com.dvlcube.app.jpa.repo.JobRepository;
 import com.dvlcube.app.manager.data.JobBean;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,11 @@ public class JobService {
     }
 
     public JobBean save(JobBean jobBean) {
+        JobBean job = new JobBean();
+        if(jobBean.getId() != null) {
+            job = this.findById(jobBean.getId()).get();
+        }
+        BeanUtils.copyProperties(jobBean, job, JobBean.ignoreProperties);
         return this.jobRepository.save(jobBean);
     }
 
