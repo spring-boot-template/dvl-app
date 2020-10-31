@@ -45,4 +45,8 @@ public class SkillService {
     public Optional<SkillBean> findByName(String name){
         return this.skillRepository.findByName(name);
     }
+
+    public Boolean existsByName(String name) {
+        return this.skillRepository.existsByName(name);
+    }
 }

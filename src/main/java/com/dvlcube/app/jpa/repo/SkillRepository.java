@@ -17,4 +17,5 @@ public interface SkillRepository extends DvlRepository<SkillBean, Long>, BasicRe
     Iterable<SkillBean> findAllByOrderByName();
     Iterable<SkillBean> findAllByNameLike(String name);
     Optional<SkillBean> findByName(String name);
+    Boolean existsByName(String name);
 }
