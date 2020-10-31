@@ -1,6 +1,8 @@
 package com.dvlcube.app.manager.data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.dvlcube.utils.interfaces.MxBean;
@@ -15,8 +17,12 @@ public class JobBean implements MxBean<Long>, Nameable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	private Long id;
+
+	@Column(unique = true)
 	private String name;
+
 	private Integer max;
 
 	public Long getId() {
