@@ -46,6 +46,7 @@ public class SkillService {
         return this.skillRepository.findAllByNameLike(name);
     }
 
+    @Transactional
     public void deleteById(Long id){
         this.skillRepository.deleteById(id);
     }

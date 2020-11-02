@@ -46,6 +46,7 @@ public class JobService {
         return this.jobRepository.findAllLike(id);
     }
 
+    @Transactional
     public void deleteById(Long id) {
         this.jobRepository.deleteById(id);
     }
