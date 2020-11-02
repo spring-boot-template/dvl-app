@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.dvlcube.app.services.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dvlcube.app.interfaces.MenuItem;
-import com.dvlcube.app.jpa.repo.SkillRepository;
 import com.dvlcube.app.manager.data.SkillBean;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
@@ -31,27 +31,26 @@ import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
 @RestController
 @MenuItem(value = CONFIGURATION)
 @RequestMapping("${dvl.rest.prefix}/skills")
-public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
-
+public class SkillRest implements MxFilterableBeanService<SkillBean, Long> {
 	@Autowired
-	private SkillRepository repo;
+	private SkillService skillService;
 
 	@Override
 	@GetMapping
 	public Iterable<SkillBean> get(@RequestParam Map<String, String> params) {
-		return repo.firstPage();
+		return skillService.findAll();
 	}
 
 	@Override
 	@GetMapping("/{id}")
 	public Optional<SkillBean> get(@PathVariable Long id) {
-		return repo.findById(id);
+		return skillService.findById(id);
 	}
 
 	@Override
 	@PostMapping
 	public MxRestResponse post(@Valid @RequestBody SkillBean body) {
-		SkillBean save = repo.save(body);
+		SkillBean save = skillService.save(body);
 		return GenericRestResponse.ok(save.getId());
 	}
 
@@ -63,7 +62,7 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	 */
 	@GetMapping("/filtered")
 	public List<SkillBean> getFiltered(@RequestParam Map<String, String> params) {
-		return repo.findAllBy(params);
+		return this.skillService.findAllBy(params);
 	}
 
 	/**
@@ -75,16 +74,26 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	 */
 	@GetMapping("/group/{group}/filtered")
 	public List<SkillBean> getGroupFiltered(@PathVariable String group, @RequestParam Map<String, String> params) {
-		return repo.findAllBy(params, group);
+		return skillService.findAllBy(params, group);
 	}
 
 	@GetMapping("/like")
-	public Iterable<SkillBean> getLike(@RequestParam(required = true) String id) {
-		return repo.findAllLike(id);
+	public Iterable<SkillBean> getLike(@RequestParam(required = true) String name) {
+		return skillService.findAllByNameLike(name);
+	}
+
+	@GetMapping("/name/{name}")
+	public Optional<SkillBean> findByName(@PathVariable String name) {
+		return skillService.findByName(name);
+	}
+
+	@GetMapping("exists/name/{name}")
+	public Boolean existsByName(@PathVariable String name) {
+		return skillService.existsByName(name);
 	}
 
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		repo.deleteById(id);
+		this.skillService.deleteById(id);
 	}
 }

@@ -6,9 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Configuration;
 
-import com.dvlcube.app.rest.StatService;
+import com.dvlcube.app.rest.StatRest;
 import com.dvlcube.utils.aspects.stats.StatsAspect;
 import com.dvlcube.utils.interfaces.MxAspect;
 import com.dvlcube.utils.interfaces.MxBean;
@@ -17,10 +18,11 @@ import com.dvlcube.utils.interfaces.MxBean;
  * Logs all HTTP requests, generating stats about the time it takes to run every
  * method.
  * 
- * @see StatService
+ * @see StatRest
  * @since 13 de fev de 2019
  * @author Ulisses Lima
  */
+@Aspect
 @Configuration
 public class RestAspect implements MxAspect {
 	private Logger log = LogManager.getLogger(this.getClass());

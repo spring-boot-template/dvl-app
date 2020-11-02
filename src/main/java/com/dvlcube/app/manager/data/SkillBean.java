@@ -1,61 +1,54 @@
 package com.dvlcube.app.manager.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 import com.dvlcube.utils.interfaces.MxBean;
 import com.dvlcube.utils.interfaces.Nameable;
 import com.dvlcube.utils.interfaces.Presentable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.util.Date;
 
 /**
- * @since 3 de jun de 2019
- * @author Ulisses Lima
+ * @since 31 de outubro de 2020
+ * @author Vitor Henrique
  */
 @Entity
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
+@EqualsAndHashCode(of = {"id"})
 public class SkillBean implements Nameable, MxBean<Long>, Presentable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;
+
 	private String name;
+
+	@Column(columnDefinition="TEXT")
 	private String description;
+
 	private String pic;
 
-	public Long getId() {
-		return id;
-	}
+	private Integer likes = 0;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	private Date dateCreated = new Date();
 
-	public String getName() {
-		return name;
-	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	private Date lastUpdated = new Date();
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	@Version
+	private Long version = 0L;
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getPic() {
-		return pic;
-	}
-
-	public void setPic(String pic) {
-		this.pic = pic;
-	}
+	public static String[] ignoreProperties = {"id", "dateCreated", "lastUpdated", "version"};
 }

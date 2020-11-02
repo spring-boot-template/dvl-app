@@ -1,45 +1,47 @@
 package com.dvlcube.app.manager.data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import com.dvlcube.utils.interfaces.MxBean;
 import com.dvlcube.utils.interfaces.Nameable;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.util.Date;
 
 /**
- * @since 3 de jun de 2019
- * @author Ulisses Lima
+ * @since 31 de outubro de 2020
+ * @author Vitor Henrique
  */
 @Entity
+@Getter
+@Setter
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
+@EqualsAndHashCode(of = {"id"})
 public class JobBean implements MxBean<Long>, Nameable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	private Long id;
+
 	private String name;
-	private Integer max;
 
-	public Long getId() {
-		return id;
-	}
+	private Integer max = 0;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	private Date dateCreated = new Date();
 
-	public String getName() {
-		return name;
-	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	private Date lastUpdated = new Date();
 
-	public void setName(String name) {
-		this.name = name;
-	}
+	@Version
+	private Long version = 0L;
 
-	public Integer getMax() {
-		return max;
-	}
-
-	public void setMax(Integer max) {
-		this.max = max;
-	}
+	public static String[] ignoreProperties = {"id", "dateCreated", "lastUpdated", "version"};
 }
