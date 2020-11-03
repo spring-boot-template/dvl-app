@@ -21,13 +21,27 @@
 		<swagger.version>2.9.2</swagger.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<!-- NOTA: este projeto deve estar no mesmo workspace para resolução local de dependências -->
 		<!-- link: https://github.com/spring-boot-template/dvl-core -->
 		<dependency>
-			<groupId>com.dvlcube.xpress</groupId>
+			<groupId>com.github.spring-boot-template</groupId>
 			<artifactId>dvl-core</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.16</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- spring boot -->

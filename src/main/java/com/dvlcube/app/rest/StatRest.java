@@ -4,6 +4,7 @@ import static com.dvlcube.app.manager.data.e.Menu.MONITORING;
 import static com.dvlcube.utils.query.MxQuery.$;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ import com.dvlcube.utils.interfaces.MxService;
 @RestController
 @MenuItem(value = MONITORING, readOnly = true)
 @RequestMapping("${dvl.rest.prefix}/stats")
-public class StatService implements MxService {
+public class StatRest implements MxService {
 	private Logger log = LogManager.getLogger(this.getClass());
 
 	/**
@@ -41,7 +42,9 @@ public class StatService implements MxService {
 	 */
 	@GetMapping
 	public List<Stat> get(@RequestParam Map<String, String> params) {
-		return Stats.values();
+		List<Stat> stats = Stats.values();
+		Collections.sort(stats);
+		return stats;
 	}
 
 	/**

@@ -90,6 +90,9 @@ this.state = {
     <div class="footer-copyright">
         <div class="container">
             dvl-core.it
+			<p>
+				Edited by<strong> Vitor Henrique Coelho Bezerra</strong>
+			</p>
         </div>
     </div>
 </footer>

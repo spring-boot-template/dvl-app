@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-    <head title="stats">
+    <head title="Skills">
     	<script type="riot/tag" src="/r/tag/riot-templates.tag"></script>
     	<script type="text/javascript" src="/r/lib/materialize/_.js"></script>
     	<script type="text/javascript" src="/r/js/vue.js"></script>
@@ -11,9 +11,7 @@
     	<script type="text/javascript" src="/r/js/riot.js"></script>
     </head>
     <body>
-        <ls-header-list all="stats">
-        	Times are in milliseconds.
-        </ls-header-list>
+        <ls-header-list all="Jobs"></ls-header-list>
 
         <div class="container">
             <div class="row">
@@ -21,35 +19,31 @@
                     <table id="vue-list" class="responsive-table highlight">
                         <thead>
                             <tr>
-                                <th>action</th>
-                                <th>min</th>
-                                <th>avg</th>
+                                <th>name</th>
                                 <th>max</th>
-                                <th>total</th>
-                                <th>count</th>
-                                <th>errors</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in list">
-                                <td>{{ item.action }}</td>
-                                <td>{{ item.min }}</td>
-								<td>{{favg(item.total,item.count)}}</td>
+                            <tr class="link"
+                                v-bind:title="'details for job '+item.id"
+                                :data-href="'./edit.htm#'+item.id"
+                                v-for="item in list">
+                                <td>{{ item.name }}</td>
                                 <td>{{ item.max }}</td>
-                                <td>{{ item.total }}</td>
-                                <td>{{ item.count }}</td>
-                                <td>{{ item.errors }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <a id="new" href="./edit.htm" class="btn waves-effect waves-light">
+                    <i class="material-icons">add</i>
+                </a>
             </div>
         </div>
 
         <ls-footer>
 	        <script type="text/javascript">
 	        	riot.mount('*');
-	        	App.getList("stats");
+	        	App.getList("jobs");
 	        </script>
         </ls-footer>
     </body>

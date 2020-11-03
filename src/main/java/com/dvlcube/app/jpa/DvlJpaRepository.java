@@ -111,12 +111,12 @@ public class DvlJpaRepository<T extends MxBean<? extends Serializable>, ID exten
 
 		// map baseado no autocomplete do materialize
 		HashMap<String, String> map = new HashMap<>();
-		for (T i : all) {
-			if (search == null || MxStringUtils.containsIgnoreCase(i.autocompleteField(), search)) {
-				if (test == null || test.test(i))
-					map.put(i.autocompleteField(), null);
-			}
-		}
+//		for (T i : all) {
+//			if (search == null || MxStringUtils.containsIgnoreCase(i.autocompleteField(), search)) {
+//				if (test == null || test.test(i))
+//					map.put(i.autocompleteField(), null);
+//			}
+//		}
 		return map;
 	}
 
