@@ -14,6 +14,7 @@ public enum Menu {
 	STATS, //
 	MONITORING, //
 	MISC, //
+	JOB,
 	;
 	private Menu() {
 		this.label = $(name()).decapitalize().replace("_", " ").o;

@@ -31,7 +31,7 @@ gprop() {
 	f="$mydir/src/main/resources/application.properties"
 	if [[ -f "$f" ]]; then
 		>&2 echo "analyzing: $f"
-		grep "$1" $mydir/src/main/resources/application.properties | grep -v '#' | cut -d'=' -f2
+		grep "$1" $mydir/src/main/resources/application.yml | grep -v '#' | cut -d'=' -f2
 	else
 		>&2 echo "not a file: $f"
 		exit 1
