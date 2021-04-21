@@ -82,14 +82,14 @@ this.state = {
             <div class="col l6 s12">
                 <h5 class="white-text">DVL Manager v<get data-url="/env/version" /></h5>
                 <p class="grey-text text-lighten-4">
-                    Manage everything.
+                    Manage everything. 
                 </p>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
-            dvl-core.it
+            dvl-core.it 111
         </div>
     </div>
 </footer>

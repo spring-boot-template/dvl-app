@@ -9,6 +9,7 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath />
 	</parent>
+	
 	<groupId>com.dvlcube.app</groupId>
 	<artifactId>dvl-app</artifactId>
 	<version>1.0.1</version>
@@ -24,10 +25,17 @@
 	<dependencies>
 		<!-- NOTA: este projeto deve estar no mesmo workspace para resolução local de dependências -->
 		<!-- link: https://github.com/spring-boot-template/dvl-core -->
+		
 		<dependency>
 			<groupId>com.dvlcube.xpress</groupId>
 			<artifactId>dvl-core</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<!-- spring boot -->
@@ -35,6 +43,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jersey</artifactId>
