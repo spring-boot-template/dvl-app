@@ -39,7 +39,7 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	@Override
 	@GetMapping
 	public Iterable<SkillBean> get(@RequestParam Map<String, String> params) {
-		return repo.firstPage();
+		return repo.findAllOrderByNome();
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	public MxRestResponse post(@Valid @RequestBody SkillBean body) {
 		SkillBean save = repo.save(body);
 		return GenericRestResponse.ok(save.getId());
-	}
+		}
 
 	/**
 	 * @param params
@@ -64,6 +64,7 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	@GetMapping("/filtered")
 	public List<SkillBean> getFiltered(@RequestParam Map<String, String> params) {
 		return repo.findAllBy(params);
+	
 	}
 
 	/**
@@ -78,9 +79,11 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 		return repo.findAllBy(params, group);
 	}
 
+	
 	@GetMapping("/like")
 	public Iterable<SkillBean> getLike(@RequestParam(required = true) String id) {
 		return repo.findAllLike(id);
+			
 	}
 
 	@DeleteMapping("/{id}")
