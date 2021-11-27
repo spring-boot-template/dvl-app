@@ -1,35 +1,25 @@
 package com.dvlcube.app.rest;
 
-import static com.dvlcube.app.manager.data.e.Menu.CONFIGURATION;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.dvlcube.app.interfaces.MenuItem;
 import com.dvlcube.app.jpa.repo.SkillRepository;
 import com.dvlcube.app.manager.data.SkillBean;
+import com.dvlcube.app.manager.data.e.Menu;
 import com.dvlcube.app.manager.data.vo.MxRestResponse;
 import com.dvlcube.utils.interfaces.rest.MxFilterableBeanService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * @since 4 de jun de 2019
  * @author Ulisses Lima
  */
 @RestController
-@MenuItem(value = CONFIGURATION)
+@MenuItem(value = Menu.SKILL)
 @RequestMapping("${dvl.rest.prefix}/skills")
 public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 
@@ -86,5 +76,15 @@ public class SkillService implements MxFilterableBeanService<SkillBean, Long> {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		repo.deleteById(id);
+	}
+
+	@GetMapping("/name/{name}")
+	public Iterable<SkillBean> getLikeSkill(@PathVariable(required = true) String name) {
+		return repo.findByName(name);
+	}
+
+	@GetMapping("/exists/name/{name}")
+	public boolean getExistsSkill(@PathVariable(required = true) String name) {
+		return repo.existsByName(name);
 	}
 }

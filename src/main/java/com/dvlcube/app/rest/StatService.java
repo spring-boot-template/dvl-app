@@ -23,7 +23,7 @@ import com.dvlcube.utils.interfaces.MxService;
 
 /**
  * Application performance stats.
- * 
+ *
  * @since 17 de abr de 2019
  * @author Ulisses Lima
  */
