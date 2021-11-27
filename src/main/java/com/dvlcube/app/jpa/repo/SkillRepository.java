@@ -12,4 +12,7 @@ import com.dvlcube.app.jpa.DvlRepository;
  */
 @Repository
 public interface SkillRepository extends DvlRepository<SkillBean, Long>, BasicRepository<SkillBean, Long> {
+    Iterable<SkillBean> findByName(String name);
+
+    boolean existsByName(String name);
 }
